@@ -1,5 +1,14 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <CobaAja />
 </template>
+
+<script>
+import CobaAja from '../components/CobaAja.vue'
+
+  export default {
+    name: 'AboutView',
+  components: {
+      CobaAja
+    },
+  }
+</script>

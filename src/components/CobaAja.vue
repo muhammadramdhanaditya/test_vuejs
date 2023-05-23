@@ -12,17 +12,8 @@
 
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
+          Welcome to Coba Aja
         </h1>
-<router-link :to="{ path:'/about', name: 'about' }">About</router-link>
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
-        </p>
       </v-col>
 
       <v-col
@@ -99,7 +90,7 @@
       ecosystem: [
         {
           text: 'vuetify-loader',
-          href: '/about',
+          href: 'https://nextjs.org/docs/pages/building-your-application/routing/linking-and-navigating',
         },
         {
           text: 'github',
