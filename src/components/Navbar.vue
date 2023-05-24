@@ -1,60 +1,49 @@
 <template>
   <nav>
-    <v-app-bar color="#e90e01" dark app>
+    <v-app-bar color="#E6990c"dark app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase">
-        PALLET MANAGEMENT SYSTEM
+        Trumecs
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
       <LocaleSwitcher />
-      <v-btn text v-for="logout in logouts" router :to="logout.route">
-        <span>{{ $t("sidebar.keluar") }}</span>
-        <v-icon right>exit_to_app</v-icon>
+      <v-btn v-for="login in logins" router :to="login.route" class="margin" color="blue darken-3">
+        <span>{{ $t("sidebar.masuk") }}</span>
       </v-btn>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" dark app class="red darken-4">
+    <v-navigation-drawer v-model="drawer" app color="white">
       <template>
-        <v-layout column align-left>
-          <v-flex class="mt-5">
+        <v-layout column align-center>
+          <v-flex class="mt-4">
             <v-img
-              src="../assets/logo-sig.png"
-              max-heigth="200"
-              max-width="400"
+              src="../assets/logo.png"
+              max-heigth="50"
+              max-width="100"
             ></v-img>
           </v-flex>
         </v-layout>
       </template>
-      <v-divider></v-divider>
-      <h3 style="color: white; margin-left: 10px">{{ $t("menu.menu") }}</h3>
       <v-list flat class="font-weight-bold">
-        <v-list-item
-          v-for="link in links"
-          :key="link.title"
-          router
-          :to="link.route"
-        >
-          <v-list-item-action>
-            <v-icon>{{ link.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title> {{ $t(link.title) }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <h3 style="margin-left: 10px">Kategori</h3>
+         <v-divider></v-divider>
         <v-list-group
-          v-for="mgm in mgms"
-          :key="mgm.title"
-          v-model="mgm.active"
-          :prepend-icon="mgm.action"
+          v-for="kat in kats"
+          :key="kat.title"
+          v-model="kat.active"
+          :prepend-icon="kat.action"
           no-action
         >
           <template v-slot:activator>
             <v-list-item-content>
-              <v-list-item-title>{{ $t(mgm.title) }}</v-list-item-title>
+              <v-list-item-title>{{ $t(kat.title) }}</v-list-item-title>
             </v-list-item-content>
           </template>
 
           <v-list-item
-            v-for="child in mgm.items"
+            v-for="child in kat.items"
             :key="child.title"
             router
             :to="child.route"
@@ -64,42 +53,6 @@
             </v-list-item-content>
           </v-list-item>
         </v-list-group>
-        <v-list-item
-          v-for="pemp in pemps"
-          :key="pemp.title"
-          router
-          :to="pemp.route"
-        >
-          <v-list-item-action>
-            <v-icon>{{ pemp.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>{{ $t(pemp.title) }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-group
-          v-for="lp in lps"
-          :key="lp.title"
-          v-model="lp.active"
-          :prepend-icon="lp.action"
-          no-action
-        >
-          <template v-slot:activator>
-            <v-list-item-content>
-              <v-list-item-title>{{ $t(lp.title) }}</v-list-item-title>
-            </v-list-item-content>
-          </template>
-
-          <v-list-item
-            v-for="child in lp.items"
-            :key="child.title"
-            router
-            :to="child.route"
-          >
-            <v-list-item-content>
-              <v-list-item-title> {{ $t(child.title) }} </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
         </v-list-group>
         <v-divider></v-divider>
         <v-list-item
@@ -125,70 +78,126 @@ import LocaleSwitcher from "@/components/LocaleSwitcher";
 export default {
   data: () => ({
     drawer: false,
-    links: [
-      { icon: "home", title: "sidebar.halamanutama", route: "/dashboard" },
-    ],
-    mgms: [
+    kats: [
       {
-        action: "mdi-file-document-outline",
-        title: "sidebar.manajemensjp",
+        action: "mdi-car-battery",
+        title: "Aki",
         items: [
-          { title: "sidebar.suratjalanpallet", route: "/surat-jalan-pallet" },
-          { title: "sidebar.sjpstatus", route: "/sjp-status" },
+          { title: "Automotif", route: "/surat-jalan-pallet" },
+          { title: "Heavy Duty / Industri", route: "/sjp-status" },
         ],
       },
       {
-        action: "mdi-shipping-pallet",
-        title: "sidebar.manajemenpallet",
+        action: "mdi-go-kart",
+        title: "Aksesoris",
         items: [
-          { title: "sidebar.mutasipallet", route: "/mutasi-pallet" },
-          { title: "sidebar.klaimpallet", route: "/klaim-pallet" },
+          { title: "Agrikultur", route: "/mutasi-pallet" },
+          { title: "Alat Berat", route: "/klaim-pallet" },
           {
-            title: "sidebar.perubahankuotapallet",
+            title: "Bus / Truck",
             route: "/perubahan-kuota-pallet",
           },
-          { title: "sidebar.palletbaru", route: "/pallet-baru" },
-          { title: "sidebar.palletrusak", route: "/pallet-rusak" },
-          { title: "sidebar.palletdiperbaiki", route: "/pallet-diperbaiki" },
-          { title: "sidebar.penyewaanpallet", route: "/penyewaan-pallet" },
+          { title: "Marine", route: "/pallet-baru" },
+          { title: "Mobil", route: "/pallet-rusak" },
+          { title: "Motor", route: "/pallet-diperbaiki" },
+          { title: "Lainnya", route: "/penyewaan-pallet" },
         ],
       },
-    ],
-    pemps: [
       {
-        icon: "mdi-truck-fast",
-        title: "sidebar.penyesuaianekspeditur",
-        route: "/penyesuaian-ekspeditur",
-      },
-      {
-        icon: "mdi-domain",
-        title: "sidebar.manajemenperusahaan",
-        route: "/manajemen-perusahaan",
-      },
-    ],
-    lps: [
-      {
-        action: "mdi-file-document-outline",
-        title: "sidebar.laporan",
+        action: "mdi-tire",
+        title: "Ban",
         items: [
-          { title: "sidebar.dasbororganisasi", route: "/dashboard" },
-          { title: "sidebar.pergerakanpallet", route: "/pergerakan-pallet" },
-          { title: "sidebar.datatransaksi", route: "/data-transaksi" },
+          { title: "Motor", route: "/mutasi-pallet" },
+          { title: "Off The Road", route: "/klaim-pallet" },
+          {
+            title: "Passenger Car",
+            route: "/perubahan-kuota-pallet",
+          },
+          { title: "Truck & Bus Bias", route: "/pallet-baru" },
+          { title: "Truck & Bus Radial", route: "/pallet-rusak" },
         ],
       },
       {
-        action: "mdi-cog",
-        title: "sidebar.pengaturan",
+        action: "mdi-barrel",
+        title: "Pelumas",
         items: [
-          { title: "sidebar.organisasi", route: "/organisasi" },
-          { title: "sidebar.perandanizin", route: "/peran-dan-izin" },
-          { title: "sidebar.manajemenpengguna", route: "/manajemen-pengguna" },
-          { title: "sidebar.kendaraan", route: "/kendaraan" },
-          { title: "sidebar.pengendara", route: "/pengendara" },
+          { title: "Automotif Oils", route: "/mutasi-pallet" },
+          { title: "Brake Fluid", route: "/klaim-pallet" },
+          {
+            title: "Circulating, Bearing & System Sylinder Oils",
+            route: "/perubahan-kuota-pallet",
+          },
+          { title: "Compressor Oils", route: "/pallet-baru" },
+          { title: "Coolant", route: "/pallet-rusak" },
+          { title: "Cutting Oils", route: "/pallet-diperbaiki" },
+          { title: "Diesel Engnie Oils", route: "/penyewaan-pallet" },
+          { title: "Engine Oils", route: "/penyewaan-pallet" },
+          { title: "Gardan Oils", route: "/penyewaan-pallet" },
+          { title: "Gasoline Engine Oils", route: "/penyewaan-pallet" },
+          { title: "Gear & Transmission Oils", route: "/penyewaan-pallet" },
+          { title: "Grease", route: "/penyewaan-pallet" },
+          { title: "Heat Transfer Oils", route: "/penyewaan-pallet" },
+          { title: "Hydraulics Oils", route: "/penyewaan-pallet" },
+          { title: "Industrial & Marine Engine Oils", route: "/penyewaan-pallet" },
+          { title: "Industrial Gears Oils", route: "/penyewaan-pallet" },
+          { title: "Natural Gas Engine Oils", route: "/penyewaan-pallet" },
+          { title: "Passenger Car Diesel Oils", route: "/penyewaan-pallet" },
+          { title: "Passenger Car Motor Oils", route: "/penyewaan-pallet" },
+          { title: "Powershift Transmission", route: "/penyewaan-pallet" },
+          { title: "Produk Khusus", route: "/penyewaan-pallet" },
+          { title: "Refrigerating Oils", route: "/penyewaan-pallet" },
+          { title: "Turbine Oils", route: "/penyewaan-pallet" },
+          { title: "Water Cooled Small Engine Oil", route: "/penyewaan-pallet" },
+        ],
+      },
+      {
+        action: "mdi-toolbox",
+        title: "Sparepart",
+        items: [
+          { title: "Agrikultur", route: "/mutasi-pallet" },
+          { title: "Alat Berat", route: "/klaim-pallet" },
+          {
+            title: "Industri",
+            route: "/perubahan-kuota-pallet",
+          },
+          { title: "Marine", route: "/pallet-baru" },
+          { title: "Truck dan Bus", route: "/pallet-rusak" },
+        ],
+      },
+      {
+        action: "mdi-tools",
+        title: "Tools",
+        items: [
+          { title: "Equipment", route: "/mutasi-pallet" },
+          { title: "Innovative", route: "/klaim-pallet" },
+          { title: "Safety", route: "/pallet-baru" },
+        ],
+      },
+      {
+        action: "mdi-excavator",
+        title: "Unit",
+        items: [
+          { title: "Agrikultur", route: "/mutasi-pallet" },
+          { title: "Alat Berat", route: "/klaim-pallet" },
+          {
+            title: "Bus / Truck",
+            route: "/perubahan-kuota-pallet",
+          },
+          { title: "Marine", route: "/pallet-baru" },
         ],
       },
     ],
-    logouts: [{ icon: "logout", title: "sidebar.keluar", route: "/" }],
+    logouts: [
+      { icon: "mdi-sale", title: "Promo", route: "/" },
+      { icon: "mdi-information-variant", title: "Tentang Kami", route: "/" },
+      { icon: "mdi-file-document-multiple", title: "Artikel", route: "/" },
+      { icon: "mdi-handshake", title: "Kemitraan", route: "/" },
+      { icon: "mdi-hand-coin", title: "Lelang", route: "/" },
+      { icon: "login", title: "sidebar.masuk", route: "/" },
+      { icon: "logout", title: "sidebar.keluar", route: "/" },
+    
+    ],
+    logins: [{ icon: "login", title: "sidebar.masuk", route: "/" }],
   }),
   components: {
     LocaleSwitcher,
@@ -198,5 +207,8 @@ export default {
  <style scoped>
 .border {
   border-left: 4px solid #0ba518;
+}
+.margin {
+  margin-left: 5px;
 }
 </style>

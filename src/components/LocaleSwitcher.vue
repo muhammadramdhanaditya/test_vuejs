@@ -53,6 +53,6 @@ export default {
   color: #ffffff;
   font-weight: bold;
   font-size: 15px;
-  background-color: #e90e01;
+  background-color: #E36990c;
 }
 </style>

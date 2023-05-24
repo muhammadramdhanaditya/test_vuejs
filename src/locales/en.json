@@ -38,6 +38,7 @@
       "manajemenpengguna" : "User Management",
       "kendaraan" : "Car",
       "pengendara" : "Driver",
+      "masuk" : "Sign Up/Log In",
       "keluar" : "Log Out"
     },
   "menu" : 
