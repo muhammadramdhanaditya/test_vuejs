@@ -1,12 +1,12 @@
 <template>
   <nav>
-    <v-app-bar color="white"dark app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="orange"></v-app-bar-nav-icon>
+    <v-app-bar color="white" dark app>
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+        color="orange"
+      ></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <v-img
-          src="../assets/logo.png"
-          max-heigth="50"
-          max-width="100">
+        <v-img src="../assets/logo.png" max-heigth="50" max-width="100">
         </v-img>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -14,7 +14,13 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
       <LocaleSwitcher />
-      <v-btn v-for="login in logins" router :to="login.route" class="margin" color="blue darken-3">
+      <v-btn
+        v-for="login in logins"
+        router
+        :to="login.route"
+        class="margin"
+        color="blue darken-3"
+      >
         <span>{{ $t("sidebar.masuk") }}</span>
       </v-btn>
     </v-app-bar>
@@ -32,8 +38,9 @@
       </template>
       <v-list flat class="font-weight-bold">
         <h3 style="margin-left: 10px">Kategori</h3>
-         <v-divider></v-divider>
+        <v-divider></v-divider>
         <v-list-group
+          class="icon"
           v-for="kat in kats"
           :key="kat.title"
           v-model="kat.active"
@@ -57,9 +64,9 @@
             </v-list-item-content>
           </v-list-item>
         </v-list-group>
-        </v-list-group>
         <v-divider></v-divider>
         <v-list-item
+          class="icon"
           v-for="logout in logouts"
           :key="logout.title"
           router
@@ -142,7 +149,10 @@ export default {
           { title: "Grease", route: "/penyewaan-pallet" },
           { title: "Heat Transfer Oils", route: "/penyewaan-pallet" },
           { title: "Hydraulics Oils", route: "/penyewaan-pallet" },
-          { title: "Industrial & Marine Engine Oils", route: "/penyewaan-pallet" },
+          {
+            title: "Industrial & Marine Engine Oils",
+            route: "/penyewaan-pallet",
+          },
           { title: "Industrial Gears Oils", route: "/penyewaan-pallet" },
           { title: "Natural Gas Engine Oils", route: "/penyewaan-pallet" },
           { title: "Passenger Car Diesel Oils", route: "/penyewaan-pallet" },
@@ -151,7 +161,10 @@ export default {
           { title: "Produk Khusus", route: "/penyewaan-pallet" },
           { title: "Refrigerating Oils", route: "/penyewaan-pallet" },
           { title: "Turbine Oils", route: "/penyewaan-pallet" },
-          { title: "Water Cooled Small Engine Oil", route: "/penyewaan-pallet" },
+          {
+            title: "Water Cooled Small Engine Oil",
+            route: "/penyewaan-pallet",
+          },
         ],
       },
       {
@@ -199,7 +212,6 @@ export default {
       { icon: "mdi-hand-coin", title: "Lelang", route: "/" },
       { icon: "login", title: "sidebar.masuk", route: "/" },
       { icon: "logout", title: "sidebar.keluar", route: "/" },
-    
     ],
     logins: [{ icon: "login", title: "sidebar.masuk", route: "/" }],
   }),
@@ -214,5 +226,8 @@ export default {
 }
 .margin {
   margin-left: 5px;
+}
+.icon >>> .v-icon {
+  color: orange; /* Change this to your desired color */
 }
 </style>
