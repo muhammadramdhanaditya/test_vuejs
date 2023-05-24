@@ -51,7 +51,7 @@
         elevation="8">
         <v-slide-group mobile-break-point="1000" show-arrows center-active cycle interval="3000">
           <v-slide-item v-for="(slide, i) in slides" :key="i">
-            <v-card width="200" class="ma-4">
+            <v-card width="200" class="ma-4" route :to="slide.route">
               <v-card-title>
                 <v-img height="200px" contain :src="slide.image"></v-img>
               </v-card-title>
@@ -238,42 +238,48 @@ export default {
     slides: [
       {
         title: 'Aki / Battery',
-        image: require('@/assets//slideshow/accu2.jpeg'),
+        image: require('@/assets//slideshow/accu.jpeg'),
+        route: '/'
       },
       {
-        title: 'TERRA PC-BUSINESS 5000',
-        image: 'https://www.wortmann.de/content/files/images/ProductImages/medium/item100956890000.jpg',
-        price: 609
+        title: 'Aksesoris',
+        image: require('@/assets//slideshow/aksesoris.jpeg'),
+        route: '/'
       },
       {
-        title: 'TERRA PC-Micro 6000SE SILENT GREENLINE ',
-        image: 'https://www.wortmann.de/content/files/images/ProductImages/medium/item100955650000.jpg',
-        price: 689
+        title: 'Ban',
+        image: require('@/assets//slideshow/ban.jpeg'),
+        route: '/'
       },
       {
-        title: 'HP ENVY 5030 multifunction printer',
-        image: 'https://images-na.ssl-images-amazon.com/images/I/81DzbjMdK8L._AC_SX569_.jpg',
-        price: 66
+        title: 'Pelumas Industri',
+        image: require('@/assets//slideshow/pelumas.jpeg'),
+        route: '/'
       },
       {
-        title: 'TERRA PC-BUSINESS 5050S',
-        image: 'https://www.wortmann.de/content/files/images/ProductImages/medium/item100955910000.jpg',
-        price: 559
+        title: 'Peralatan Kerja',
+        image: require('@/assets//slideshow/peralatan-kerja.jpeg'),
+        route: '/'
       },
       {
-        title: 'TERRA PC-BUSINESS 5000',
-        image: 'https://www.wortmann.de/content/files/images/ProductImages/medium/item100956890000.jpg',
-        price: 609
+        title: 'Safety Tools',
+        image: require('@/assets//slideshow/safety-tool.jpeg'),
+        route: '/'
       },
       {
-        title: 'TERRA PC-Micro 6000SE SILENT GREENLINE ',
-        image: 'https://www.wortmann.de/content/files/images/ProductImages/medium/item100955650000.jpg',
-        price: 689
+        title: 'Sparepart',
+        image: require('@/assets//slideshow/sparepart.jpeg'),
+        route: '/'
       },
       {
-        title: 'HP ENVY 5030 multifunction printer',
-        image: 'https://images-na.ssl-images-amazon.com/images/I/81DzbjMdK8L._AC_SX569_.jpg',
-        price: 66
+        title: 'Unit Alat Berat',
+        image: require('@/assets//slideshow/alat-berat.jpeg'),
+        route: '/'
+      },
+      {
+        title: 'Unit Bus & Truk',
+        image: require('@/assets//slideshow/dumptruck.jpeg'),
+        route: '/'
       }
     ],
     pics: [
