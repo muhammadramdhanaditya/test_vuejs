@@ -2,23 +2,23 @@
   <v-app>
     <Navbar />
       <v-container>
-        <h1 class="heading black--text">{{ $t("sidebar.klaimpallet") }}</h1>
+        <h1 class="heading black--text">{{ $t("sidebar.manajemenpengguna") }}</h1>
         <v-spacer></v-spacer>
         <v-col md-12>
         <v-card>
             <v-card-title>
-              Manajemen Klaim Pallet
+              Semua Transaksi
             </v-card-title>
             <v-divider></v-divider>
                 <v-card>
                     <v-card-title>
                       <v-btn v-for="add in adds"
                 router :to="add.route"
-                >Ajukan Klaim Pallet</v-btn>
+                >Tampilkan Data dalam satu minggu</v-btn>
+                <v-btn
+                >Tampilkan Data dalam satu bulan</v-btn>
                 <v-btn
                 >{{ $t("manajemenpengguna.unduh") }}</v-btn>
-                <v-btn color="success"
-                >Scan QR</v-btn>
                     <v-spacer></v-spacer>
                     <v-text-field
                         v-model="search"
@@ -27,6 +27,8 @@
                         single-line
                         hide-details
                     ></v-text-field>
+                    <v-btn
+                >Query</v-btn>
                     </v-card-title>
                     <v-data-table class="custom-table"
                     :loading="loading"
@@ -36,6 +38,10 @@
                     elevation="2"
                     border
                     >
+                    <template v-slot:item.edit="{ item }">
+                      <v-btn color="yellow" small @click="editData(item)"
+                      ><v-icon>mdi-pencil</v-icon></v-btn>
+                    </template>
                     <template v-slot:item.hapus="{ item }">
                       <v-btn class="warna-font" color="red" small @click="hapusData(item)">{{ $t('manajemenpengguna.hapus') }}</v-btn>
                     </template>
@@ -65,34 +71,26 @@ export default {
   data() {
         return {
             headers: [
-                { value: 'nomormutasi', text: 'Nomor Klaim Pallet' },
-                { value: 'keberangkatan', text: 'ID Perusahaan Distributor' },
-                { value: 'tujuan', text: 'ID Manager' },
-                { value: 'checkerpengirim', text: 'ID PIC Distributor' },
-                { value: 'checkerpenerimaan', text: 'Status Transaksi' },
-                { value: 'ekspeditur', text: 'Alasan Manager' },
-                { value: 'nomorkendaraan', text: 'Alasan Distributor' },
-                { value: 'pengendara', text: 'BER Pallet' },
-                { value: 'status', text: 'Missing Pallet' },
-                { value: 'alasan', text: 'Biaya / Pallet' },
-                { value: 'catatan', text: 'Total Biaya' },
-                { value: 'dibuat', text: 'Dibuat Oleh' },
-                { value: 'diperbarui', text: 'Diperbarui Saat' },
-                { value: 'tinjau', text: 'Persetujuan Manager' },
-                { value: 'terima', text: 'Persetujuan Distributor' },
-                { value: 'terima', text: 'Tinjau Tagihan' },
-                { value: 'terima', text: 'Memperbarui' },
+                { value: 'name', text: this.$t('manajemenpengguna.namalengkap') },
+                { value: 'username', text: this.$t('login.namapengguna')},
+                { value: 'email', text: 'Email' },
+                { value: 'edit', text: this.$t('manajemenpengguna.sunting')},
                 { value: 'hapus', text: this.$t('manajemenpengguna.hapus')}
             ],
             items: [
                 { name :'Daud', username: 'daudtea', email: 'mramdhanass@gmail.com' }
             ],
             search: '',
-            adds: [{ route: "/tambah-mutasi-pallet" }],
+            adds: [{ route: "/tambah-pengguna" }],
 
         }
     },
     methods: {
+    editData(item) {
+      // Logika untuk mengedit data
+      console.log('Mengedit data:', item);
+      this.$router.push({ path: "/edit-pengguna" });
+    },
     hapusData(item) {
       // Logika untuk menghapus data
       console.log('Menghapus data:', item);

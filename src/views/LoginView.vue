@@ -57,8 +57,6 @@
                     <v-btn
                       block
                       color="success"
-                      :disabled="isDisabled"
-                      @click="login"
                       >{{ $t("login.masuk") }}</v-btn
                     >
                   </v-card-actions>
@@ -120,8 +118,6 @@
                     <v-btn
                       block
                       color="success"
-                      :disabled="isDisabled"
-                      @click="login"
                       >{{ $t("login.masuk") }}</v-btn>
                   </v-card-actions>
                   <p class=" ">{{ $t("login.lupa") }}</p>
@@ -162,7 +158,6 @@
                     @click:append="handleIcon"
                     v-model="user.password"
                   />
-                  <v-alert v-if="error" type="error">{{ error }}</v-alert>
                 </v-card-text>
                 <v-checkbox
                   :label="$t('login.ingat')"
@@ -175,8 +170,8 @@
                   <v-btn
                     block
                     color="success"
-                    :disabled="isDisabled"
-                    @click="login"
+                    :disabled="!valid"
+                    type="submit"
                   >{{ $t("login.masuk") }}</v-btn
                   >
                 </v-card-actions>
@@ -194,8 +189,7 @@
 </template>
 
 <script>
-import api from '@/api.js';
-import { mapActions , mapState } from 'vuex'
+import { mapActions } from 'vuex'
 import LocaleSwitcher from "../components/LocaleSwitcher.vue";
 export default {
   name: "LoginView",
@@ -208,35 +202,27 @@ export default {
       showPassword: false,
       valid: false,
       userRules: [
-        v => !!v || this.$t('login.validasi.namapengguna'),
+        v => !!v || this.$t('login.validasinamapengguna'),
       ],
       pwRules: [
-        v => !!v || this.$t('login.validasi.katasandi'),
+        v => !!v || this.$t('login.validasikatasandi'),
       ],
-      isDisabled: true,
       responseMessage: '',
     };
   },
   methods: {
-    login() {
-      api.login(this.user)
-        .then((response) => {
-          // Response is successful
-          this.responseMessage = 'Login berhasil';
-        })
-        .catch((error) => {
-          // Response failed
-          this.responseMessage = 'Login gagal';
-        });
+    ...mapActions('auth', ['login']),
+    async login() {
+      try {
+        const token = await this.$store.dispatch('auth/login', this.user);
+        // redirect to dashboard or home page after successful login
+      } catch (error) {
+        this.responseMessage = error.message;
+      }
     },
     handleIcon() {
       this.showPassword = !this.showPassword;
     },
-  },
-  computed: {
-      isDisabled() {
-        return !this.valid;
-      }
   },
   components: {
     LocaleSwitcher,

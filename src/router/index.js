@@ -13,10 +13,7 @@ const routes = [
   {
     path: '/dashboard',
     name: 'dashboard',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/dasbor-organisasi/IndexView.vue')
+    component: () => import('../views/dasbor-organisasi/IndexView.vue')
   },
   {
     path: '/data-transaksi',
@@ -68,6 +65,15 @@ const routes = [
     component: () => import('../views/organisasi/IndexView.vue')
   },
   {
+    path: '/tambah-organisasi',
+    name: 'tambah-organisasi',
+    component: () => import('../views/organisasi/AddView.vue')
+  },{
+    path: '/edit-organisasi',
+    name: 'edit-organisasi',
+    component: () => import('../views/organisasi/EditView.vue')
+  },
+  {
     path: '/pallet-baru',
     name: 'pallet-baru',
     component: () => import('../views/pallet-baru/IndexView.vue')
@@ -106,6 +112,11 @@ const routes = [
     path: '/perubahan-kuota-pallet',
     name: 'perubahan-kuota-pallet',
     component: () => import('../views/perubahan-kuota-pallet/IndexView.vue')
+  },
+  {
+    path: '/semua-transaksi',
+    name: 'semua-transaksi',
+    component: () => import('../views/semua-transaksi/IndexView.vue')
   },
   {
     path: '/sjp-status',

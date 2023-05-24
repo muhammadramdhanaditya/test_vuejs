@@ -27,10 +27,10 @@
                     ></v-text-field>
                     </v-card-title>
                     <v-data-table class="custom-table"
-                    :loading="loading"
+                    v-if="!loading"
                     :headers="headers"
                     :search="search"
-                    :items="items"
+                    :items="users.data.data.data"
                     elevation="2"
                     border
                     >
@@ -39,12 +39,22 @@
                       ><v-icon>mdi-pencil</v-icon></v-btn>
                     </template>
                     <template v-slot:item.hapus="{ item }">
-                      <v-btn class="warna-font" color="red" small @click="hapusData(item)">{{ $t('manajemenpengguna.hapus') }}</v-btn>
+                      <v-btn class="warna-font" color="red" small @click="deleteItem(item)">{{ $t('manajemenpengguna.hapus') }}</v-btn>
                     </template>
                     </v-data-table>
                 </v-card>
           </v-card>
       </v-col>
+      <v-dialog v-model="dialog" elevation="2">
+      <v-card>
+      <v-card-title>Hapus Data Pengguna?</v-card-title>
+      <v-card-text>Anda yakin ingin menghapus Pengguna ini?</v-card-text>
+      <v-card-actions>
+        <v-btn @click="dialog = false" elevation="2">Tidak</v-btn>
+        <v-btn @click="confirmDelete" color="red" class="warna-font" elevation="2">Ya</v-btn>
+      </v-card-actions>
+      </v-card>
+       </v-dialog>
       </v-container>
     <Footer />
   </v-app>
@@ -54,9 +64,8 @@
 import Breadcomp from "@/components/Breadcrumb.vue";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import en from "@/locales/en.json";
-import id from "@/locales/id.json";
-// @ is an alias to /src
+import axios from "axios";
+
 export default {
   name: "ManajemenPengguna",
   components: {
@@ -66,32 +75,84 @@ export default {
   },
   data() {
         return {
+            // headers: [
+            //     { value: 'fullname', text: this.$t('manajemenpengguna.namalengkap') },
+            //     { value: 'username', text: this.$t('login.namapengguna')},
+            //     { value: 'email', text: 'Email' },
+            //     { value: 'edit', text: this.$t('manajemenpengguna.sunting')},
+            //     { value: 'hapus', text: this.$t('manajemenpengguna.hapus')}
+            // ],
             headers: [
-                { value: 'name', text: this.$t('manajemenpengguna.namalengkap') },
-                { value: 'username', text: this.$t('login.namapengguna')},
-                { value: 'email', text: 'Email' },
-                { value: 'edit', text: this.$t('manajemenpengguna.sunting')},
-                { value: 'hapus', text: this.$t('manajemenpengguna.hapus')}
-            ],
-            items: [
-                { name :'Daud', username: 'daudtea', email: 'mramdhanass@gmail.com' }
-            ],
+        { text: this.$t('manajemenpengguna.namalengkap'), value: 'fullname' },
+        { text: this.$t('login.namapengguna'), value: 'username' },
+        { text: 'Email', value: 'email' },
+        { text: this.$t('manajemenpengguna.sunting'), value: 'edit', sortable: false },
+        { text: this.$t('manajemenpengguna.hapus'), value: 'hapus', sortable: false }
+      ],
+            users: {
+              data:{
+                data:{
+                  data:[]
+                }
+              }
+            },
             search: '',
             adds: [{ route: "/tambah-pengguna" }],
+            loading: false,
+            dialog: false,
+            deleteId: null,
 
         }
     },
     methods: {
+      getData() {
+  this.loading = true;
+  axios
+    .get("http://localhost:3000/users")
+    .then((response) => {
+      this.users.data.data.data = response.data.data.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      this.loading = false;
+    });
+},
     editData(item) {
-      // Logika untuk mengedit data
       console.log('Mengedit data:', item);
-      this.$router.push({ path: "/edit-pengguna" });
+      this.pengguna = {
+        fullname: item.fullname,
+        username: item.username,
+        email: item.email,
+        password: item.password,
+      };    
+      this.$router.push({ path: "/edit-pengguna"});
     },
-    hapusData(item) {
-      // Logika untuk menghapus data
-      console.log('Menghapus data:', item);
-    }
+    deleteItem(item) {
+    this.deleteId = item.id;
+    this.dialog = true;
+  },
+  confirmDelete() {
+    axios
+      .delete(`http://localhost:3000/users/${this.deleteId}`)
+      .then((response) => {
+        this.getData();
+        this.dialog = false;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  },
+  mounted() {
+    this.getData();
+  },
+  computed: {
+  computedItems() {
+    return this.users.data.slice((this.page - 1) * this.itemsPerPage, this.page * this.itemsPerPage)
   }
+}
 };
 </script>
 <style scoped>
