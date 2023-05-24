@@ -50,7 +50,7 @@ export default {
   border-radius: 8px;
   border: 1px solid #ffffff;
   padding: 4px;
-  color: #ffffff;
+  color: orange;
   font-weight: bold;
   font-size: 15px;
   background-color: #E36990c;

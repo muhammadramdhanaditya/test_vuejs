@@ -4,7 +4,7 @@
     <v-container>
       <v-layout row wrap>
         <v-flex sm6 xs12 md8 lg3>
-          <v-card class="ma-1">
+          <v-card class="ma-1" elevation="8">
             <v-card-title>Temukan Kebutuhanmu</v-card-title>
             <v-list dense>
               <v-list-item-group
@@ -30,7 +30,8 @@
             cycle
             height="445"
             hide-delimiter-background
-            show-arrows-on-hover>
+            show-arrows-on-hover
+            elevation="8">
             <v-carousel-item
               v-for="(pic,i) in pics"
               :key="i"

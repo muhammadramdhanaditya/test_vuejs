@@ -1,9 +1,13 @@
 <template>
   <nav>
-    <v-app-bar color="#E6990c"dark app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="text-uppercase">
-        Trumecs
+    <v-app-bar color="white"dark app>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="orange"></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        <v-img
+          src="../assets/logo.png"
+          max-heigth="50"
+          max-width="100">
+        </v-img>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
