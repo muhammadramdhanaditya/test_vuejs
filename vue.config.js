@@ -5,7 +5,7 @@ module.exports = defineConfig({
     ],
 
     devServer: {
-        port : 5000
+        port : 8000
     },
 
     lintOnSave: false,
