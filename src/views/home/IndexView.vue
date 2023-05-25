@@ -3,32 +3,10 @@
     <Navbar />
     <v-container>
       <v-layout row wrap>
-        <v-flex sm6 xs12 md8 lg3>
-          <v-card class="ma-1" elevation="8">
-            <v-card-title>Temukan Kebutuhanmu</v-card-title>
-            <v-list dense>
-              <v-list-item-group
-                v-model="model"
-                active-class="border"
-                color="indigo">
-                <v-list-item
-                  v-for="(item, i) in items"
-                  :key="i">
-                  <v-list-item-icon>
-                    <v-icon v-text="item.icon"></v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title v-text="item.text"></v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list>
-          </v-card>
-        </v-flex>
-        <v-flex sm6 xs12 md8 lg9>
+        <v-flex sm6 xs12 md8 lg12>
           <v-carousel 
             cycle
-            height="445"
+            height="400"
             hide-delimiter-background
             show-arrows-on-hover
             elevation="8">
@@ -45,19 +23,20 @@
       </v-layout>
       <v-col>
         <br>
-        <h2>Daftar Kategori</h2>
+        <h1>Daftar Kategori</h1>
       </v-col>
       <v-sheet 
-        class="mt-5 mx-auto"
+        class="mt-3 mx-auto"
         elevation="8">
         <v-slide-group mobile-break-point="1000" show-arrows center-active cycle interval="3000">
           <v-slide-item v-for="(slide, i) in slides" :key="i">
-            <v-card width="200" class="ma-4" route :to="slide.route">
+            <v-card width="180" class="text-center ma-4" route :to="slide.route">
               <v-card-title>
-                <v-img height="200px" contain :src="slide.image"></v-img>
+                <v-img height="100px" contain :src="slide.image"></v-img>
               </v-card-title>
               <v-card-text>
                 <b>{{ slide.title }}</b>
+                
               </v-card-text>
             </v-card>
           </v-slide-item>
@@ -65,160 +44,55 @@
       </v-sheet>
       <v-col>
         <br>
-        <h2>Daftar Kategori</h2>
+        <h1>Pelumas Industri</h1>
       </v-col>
-      <v-layout row>
-        <v-flex sm6 xs12 md6 lg4 class="text-center">
-          <v-card class="ma-3">
-            <v-card-title>Aki</v-card-title>
-            <v-row align="center" justify="center">
-              <v-col cols="12">
-                <v-row>
-                  <v-col md4>
-                    <v-img 
-                      class="mx-auto"
-                      src="@/assets/gs-battery.png"
-                      max-heigth="80"
-                      max-width="80">
-                    </v-img>
-                  </v-col>
-                  <v-col md4>
-                    <v-img
-                      class="mx-auto"
-                      src="@/assets/incoe.png"
-                      max-heigth="100"
-                      max-width="100">
-                    </v-img>
-                  </v-col>
-                  <v-col lg4>
-                    <v-img
-                      class="mx-auto"
-                      src="@/assets/fb.png"
-                      max-heigth="80"
-                      max-width="80">
-                    </v-img>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
-            <v-row align="center" justify="center">
-              <v-col cols="12">
-                <v-row>
-                  <v-col md4>
-                    <p class="text-center">GS Battery</p>
-                  </v-col>
-                  <v-col md4>
-                    <p class="text-center">Incoe Battery</p>
-                  </v-col>
-                  <v-col lg4>
-                    <p class="text-center">Furukawa</p>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
-          </v-card>
+      <v-sheet 
+        class="mt-3 mx-auto"
+        elevation="8">
+        <v-slide-group mobile-break-point="1000" show-arrows center-active cycle interval="3000">
+          <v-slide-item v-for="(slide, i) in pelumas" :key="i">
+            <v-card width="180" class="text-center ma-4" route :to="slide.route">
+              <v-card-title>
+                <v-img height="100px" contain :src="slide.image"></v-img>
+              </v-card-title>
+              <v-card-text>
+                <b>{{ slide.title }}</b><br>
+                <v-list-item align="left" justify="center"
+                  v-for="child in slide.list"
+                  :key="child.title"
+                  router
+                  :to="child.route"
+                  class="size"
+                >{{ child.title }}
+                </v-list-item>
+              </v-card-text>
+              <v-card-actions>
+                    <v-btn outlined color="orange">
+                        <v-icon small left >message</v-icon>
+                        <h6>Selengkapnya</h6>
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+          </v-slide-item>
+        </v-slide-group>
+      </v-sheet>
+      <v-col align="center">
+        <br>
+        <h1 class="text-center">Trumecs menyediakan</h1>
+      </v-col>
+      <v-row>
+      <v-flex xs12 sm6 md4 lg3 v-for="person in team" :key="person.name">
+              <v-card class="text-center ma-3" height="330">
+                <v-responsive class="pt-4">
+                     <img :src="person.src" alt="" height="200" width="200" >
+                </v-responsive>
+                <v-card-text>
+                  <h4 class="subheading">{{person.name}}</h4>
+                  <h6 class="grey--text">{{person.desc}}</h6>
+                </v-card-text>
+              </v-card>
         </v-flex>
-        <v-flex sm6 xs12 md6 lg4>
-          <v-card class="ma-3">
-            <v-card-title>Ban</v-card-title>
-            <v-row align="center" justify="center">
-              <v-col cols="12">
-                <v-row>
-                  <v-col md4>
-                    <v-img 
-                      class="mx-auto"
-                      src="@/assets/giti.png"
-                      max-heigth="80"
-                      max-width="80">
-                    </v-img>
-                  </v-col>
-                  <v-col md4>
-                    <v-img
-                      class="mx-auto"
-                      src="@/assets/kaizen.png"
-                      max-heigth="100"
-                      max-width="100">
-                    </v-img>
-                  </v-col>
-                  <v-col lg4>
-                    <v-img
-                      class="mx-auto"
-                      src="@/assets/hi-tech.png"
-                      max-heigth="80"
-                      max-width="80">
-                    </v-img>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
-            <v-row align="center" justify="center">
-              <v-col cols="12">
-                <v-row>
-                  <v-col md4>
-                    <p class="text-center">Giti Tyre</p>
-                  </v-col>
-                  <v-col md4>
-                    <p class="text-center">Kaizen</p>
-                  </v-col>
-                  <v-col lg4>
-                    <p class="text-center">Hi-Tech</p>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-flex>
-        <v-flex sm6 xs12 md6 lg4>
-          <v-card class="ma-3">
-            <v-card-title>Sparepart Alat Berat</v-card-title>
-            <v-row align="center" justify="center">
-              <v-col cols="12">
-                <v-row>
-                  <v-col md4>
-                    <v-img 
-                      class="mx-auto"
-                      src="@/assets/man.png"
-                      max-heigth="80"
-                      max-width="80">
-                    </v-img>
-                  </v-col>
-                  <v-col md4>
-                    <v-img
-                      class="mx-auto"
-                      src="@/assets/camc.png"
-                      max-heigth="100"
-                      max-width="100">
-                    </v-img>
-                  </v-col>
-                  <v-col lg4>
-                    <v-img
-                      class="mx-auto"
-                      src="@/assets/doosan.png"
-                      max-heigth="80"
-                      max-width="80">
-                    </v-img>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
-            <v-row align="center" justify="center">
-            <v-col cols="12">
-                <v-row>
-                  <v-col md4>
-                    <p class="text-center">MAN</p>
-                  </v-col>
-                  <v-col md4>
-                    <p class="text-center">CAMC</p>
-                  </v-col>
-                  <v-col lg4>
-                    <p class="text-center">Doosan</p>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-flex>
-      </v-layout>
+      </v-row>
     </v-container>
     <Footer />
   </v-app>
@@ -227,6 +101,8 @@
 <script>
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { mapState } from 'vuex';
+
 // @ is an alias to /src
 export default {
   name: "Dashboard",
@@ -234,107 +110,21 @@ export default {
     Navbar,
     Footer
   },
-  data: () => ({
-    model: [],
-    slides: [
-      {
-        title: 'Aki / Battery',
-        image: require('@/assets//slideshow/accu.jpeg'),
-        route: '/'
-      },
-      {
-        title: 'Aksesoris',
-        image: require('@/assets//slideshow/aksesoris.jpeg'),
-        route: '/'
-      },
-      {
-        title: 'Ban',
-        image: require('@/assets//slideshow/ban.jpeg'),
-        route: '/'
-      },
-      {
-        title: 'Pelumas Industri',
-        image: require('@/assets//slideshow/pelumas.jpeg'),
-        route: '/'
-      },
-      {
-        title: 'Peralatan Kerja',
-        image: require('@/assets//slideshow/peralatan-kerja.jpeg'),
-        route: '/'
-      },
-      {
-        title: 'Safety Tools',
-        image: require('@/assets//slideshow/safety-tool.jpeg'),
-        route: '/'
-      },
-      {
-        title: 'Sparepart',
-        image: require('@/assets//slideshow/sparepart.jpeg'),
-        route: '/'
-      },
-      {
-        title: 'Unit Alat Berat',
-        image: require('@/assets//slideshow/alat-berat.jpeg'),
-        route: '/'
-      },
-      {
-        title: 'Unit Bus & Truk',
-        image: require('@/assets//slideshow/dumptruck.jpeg'),
-        route: '/'
-      }
-    ],
-    pics: [
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-          },
-        ],
-    items: [
-        {
-          icon: 'mdi-car-battery',
-          text: 'Aki/Baterai',
-        },
-        {
-          icon: 'mdi-go-kart',
-          text: 'Aksesoris',
-        },
-        {
-          icon: 'mdi-tire',
-          text: 'Ban',
-        },
-        {
-          icon: 'mdi-barrel',
-          text: 'Pelumas Industri',
-        },
-        {
-          icon: 'mdi-tools',
-          text: 'Peralatan Kerja',
-        },
-        {
-          icon: 'mdi-safety-goggles',
-          text: 'Safety Tools',
-        },
-        {
-          icon: 'mdi-toolbox',
-          text: 'Sparepart',
-        },
-        {
-          icon: 'mdi-excavator',
-          text: 'Unit Alat Berat',
-        },
-        {
-          icon: 'mdi-truck-outline',
-          text: 'Unit Bus & Truk',
-        },
-      ],
-  }),
+  computed : {
+  ...mapState({
+      model: state => state.home.model,
+      slides: state => state.home.slides,
+      items: state => state.home.items,
+      pics: state => state.home.pics,
+      pelumas: state => state.home.pelumas,
+      team: state => state.home.team,
+    }),
+  }
 };
 </script>
+
+<style scoped>
+.size {
+  font-size: 10px;
+}
+</style>

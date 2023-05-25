@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import en from "@/locales/en.json"
-import id from "@/locales/id.json"
 
 Vue.use(Vuex)
 
