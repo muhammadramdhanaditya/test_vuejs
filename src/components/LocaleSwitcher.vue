@@ -1,6 +1,5 @@
 <template>
  <div class="change-language">
-  <img class="change-icon" src="~@/assets/change-lang.png" alt="change-language">
   <select class="select" v-model="selectedLanguage">
       <option v-for="option in options" :value="option.value" :key="option.value">{{ option.text }}</option>
     </select>

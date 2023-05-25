@@ -68,6 +68,31 @@
           </v-list-item>
         </v-list-group>
         <v-divider></v-divider>
+        <v-list-group
+          class="icon"
+          v-for="kat in kemitraan"
+          :key="kat.title"
+          v-model="kat.active"
+          :prepend-icon="kat.icon"
+          no-action
+        >
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title>{{ $t(kat.title) }}</v-list-item-title>
+            </v-list-item-content>
+          </template>
+
+          <v-list-item
+            v-for="child in kat.items"
+            :key="child.title"
+            router
+            :to="child.route"
+          >
+            <v-list-item-content>
+              <v-list-item-title>{{ $t(child.title) }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-group>
         <v-list-item
           class="icon"
           v-for="logout in logouts"
@@ -100,6 +125,7 @@ export default {
   computed: {
     ...mapState({
       kats: state => state.navbar.kats,
+      kemitraan: state => state.navbar.kemitraan,
       logins: state => state.navbar.logins,
       logouts: state => state.navbar.logouts,
     })

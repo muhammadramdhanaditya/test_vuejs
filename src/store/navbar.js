@@ -4,11 +4,20 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
+  kemitraan: [
+    {
+        icon: "mdi-handshake",
+        title: "Kemitraan",
+        items: [
+          { title: "Principal", route: "/principal" },
+          { title: "Agen", route: "/agen" },
+        ],
+    },
+    ],
     logouts: [
       { icon: "mdi-sale", title: "Promo", route: "/" },
       { icon: "mdi-information-variant", title: "Tentang Kami", route: "/" },
       { icon: "mdi-file-document-multiple", title: "Artikel", route: "/" },
-      { icon: "mdi-handshake", title: "Kemitraan", route: "/" },
       { icon: "mdi-hand-coin", title: "Lelang", route: "/" },
       { icon: "login", title: "sidebar.masuk", route: "/" },
       { icon: "logout", title: "sidebar.keluar", route: "/" },

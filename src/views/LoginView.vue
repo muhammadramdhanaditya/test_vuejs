@@ -9,7 +9,7 @@
                   <v-row>
                     <v-col cols="12" md="6">
                       <v-card-text class="mt-12">
-                        <v-img style="margin-left: 170px; margin-top: -50px;"
+                        <v-img class="mx-auto" style="margin-top: -50px;"
                         src="../assets/trumecs.png"
                         max-heigth="1"
                         max-width="100"
@@ -99,7 +99,7 @@
                     </v-col>
                     <v-col cols="12" md="6">
                       <v-card-text class="mt-12">
-                        <v-img style="margin-left: 170px; margin-top: -50px;"
+                        <v-img style="margin-top: -50px;" class="mx-auto"
                         src="../assets/trumecs.png"
                         max-heigth="1"
                         max-width="100"

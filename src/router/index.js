@@ -15,6 +15,17 @@ const routes = [
     name: 'dashboard',
     component: () => import('../views/home/IndexView.vue')
   },
+  // kemitraan
+  {
+    path: '/principal',
+    name: 'principal',
+    component: () => import('../views/kemitraan/PrincipalView.vue')
+  },
+  {
+    path: '/agen',
+    name: 'agen',
+    component: () => import('../views/kemitraan/AgenView.vue')
+  },
 ]
 
 const router = new VueRouter({

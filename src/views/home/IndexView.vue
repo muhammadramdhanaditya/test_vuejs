@@ -78,7 +78,7 @@
       </v-sheet>
       <v-col align="center">
         <br>
-        <h1 class="text-center">Trumecs menyediakan</h1>
+        <h1 class="text-center">Trumecs juga menyediakan</h1>
       </v-col>
       <v-row>
       <v-flex xs12 sm6 md4 lg3 v-for="person in team" :key="person.name">
